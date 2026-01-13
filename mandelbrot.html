@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id='c' width='800' height='600'></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const img = ctx.createImageData(800, 600);
+let data = img.data;
+let i = 0;
+for (let y = 0; y < 600; y++) {
+  for (let x = 0; x < 800; x++) {
+    let zx = 0, zy = 0;
+    let cX = (x - 400) / 150;
+    let cY = (y - 300) / 150;
+    let iter = 300;
+    while (zx*zx + zy*zy < 4 && iter > 0) {
+      let tmp = zx*zx - zy*zy + cX;
+      zy = 2*zx*zy + cY;
+      zx = tmp;
+      iter--;
+    }
+    let color = iter | (iter << 8);
+    data[i++] = (color >> 16) & 255;
+    data[i++] = (color >> 8) & 255;
+    data[i++] = color & 255;
+    data[i++] = 255;
+  }
+}
+ctx.putImageData(img, 0, 0);
+</script>
+</body>
+</html>
