@@ -6,12 +6,14 @@ int main() {
     const int HEIGHT = 600;
     const int MAX_ITER = 300;
 
+    // Read in the file to output strings to
     std::ofstream out("mandelbrot.html");
     if (!out) {
         std::cerr << "Error opening HTML output file\n";
         return 1;
     }
 
+    // Writes the strings to mandelbrot.html
     out << "<!DOCTYPE html>\n<html>\n<body>\n";
     out << "<canvas id='c' width='" << WIDTH << "' height='" << HEIGHT << "'></canvas>\n";
     out << "<script>\n";
